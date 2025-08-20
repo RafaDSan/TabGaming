@@ -1,0 +1,7 @@
+services:
+  database:
+    image: "postgres:16.0-alpine3.18"
+    environment:
+      POSTGRES_PASSWORD: "local_password"
+    ports:
+      - "5432:5432" # Outstide the container, the host, which connects with the psql/ inside the container
