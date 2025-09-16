@@ -15,14 +15,10 @@ export default async function migrations(request, response) {
   };
 
   if (request.method === "GET") {
-    console.log("Entrou no GET");
     const pendingMigrations = await migrationRunner(defaultMigrationOptions);
     await dbClient.end();
     response.status(200).json(pendingMigrations);
-  }
-
-  if (request.method === "POST") {
-    console.log("Entrou no POST");
+  } else if (request.method === "POST") {
     const migratedMigrations = await migrationRunner({
       ...defaultMigrationOptions,
       dryRun: false,
@@ -35,7 +31,25 @@ export default async function migrations(request, response) {
     }
 
     response.status(200).json(migratedMigrations);
+  } else {
+    console.log("This HTTP method is not allowed.");
   }
+
+  // if (request.method === "POST") {
+  //   console.log("Entrou no POST");
+  //   const migratedMigrations = await migrationRunner({
+  //     ...defaultMigrationOptions,
+  //     dryRun: false,
+  //   });
+
+  //   await dbClient.end();
+
+  //   if (migratedMigrations.length > 0) {
+  //     response.status(201).json(migratedMigrations);
+  //   }
+
+  //   response.status(200).json(migratedMigrations);
+  // }
 
   return response.status(405).end();
 }
