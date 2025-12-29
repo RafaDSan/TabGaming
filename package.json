@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^20.2.0",
     "@types/jest": "^30.0.0",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
